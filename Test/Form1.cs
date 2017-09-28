@@ -115,14 +115,17 @@ namespace Test
             }*/
            
             pictureBox1.Image = normalBMP;
+            if(didUserClickMirror)
             pictureBox2.Image = rotatedPic;
         }
         Bitmap firstLoadPic;
+        OpenFileDialog ofd = new OpenFileDialog();
         private void openFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Console.WriteLine("openFileTool");
             try
             {
-                OpenFileDialog ofd = new OpenFileDialog();
+                ofd = new OpenFileDialog();
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     //Image<Bgr, byte> imgInput = new Image<Bgr, byte>(ofd.FileName);
@@ -148,9 +151,12 @@ namespace Test
         {
             pictureBox2.Image = null;
             didUserClickMirror = false;
-            rotatedPic = firstLoadPic;
-            normalBMP = firstLoadPic;
-            pictureBox1.Image = firstLoadPic;
+            rotatedPic = null;
+            normalBMP = new Bitmap(ofd.FileName);
+           // normalBMP = firstLoadPic;
+            Console.WriteLine("Reopen called");
+            pictureBox1.Image = null;
+            pictureBox1.Image = normalBMP;
         }
     }
 }
