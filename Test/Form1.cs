@@ -53,7 +53,7 @@ namespace Test
             }
 
 
-            rotatedPic = new Bitmap(normalBMP.Width, normalBMP.Height);
+            rotatedPic = new Bitmap(normalBMP.Width*2, normalBMP.Height);
 
             for (int i = 0; i < normalBMP.Width; i++)
             {
@@ -61,12 +61,29 @@ namespace Test
                 for (int j = 0; j < normalBMP.Height; j++)
                 {
                     //colorMatrix[i][j] = bmp.GetPixel(i,j);
-                    rotatedPic.SetPixel(i, j, colorMatrix[i][j]);
+                    rotatedPic.SetPixel(i, j, normalBMP.GetPixel(i,j));
                 }
             }
-            pictureBox2.Size = new Size(normalBMP.Width, normalBMP.Height);
-            pictureBox2.Image = rotatedPic;
-            didUserClickMirror = true;
+            y = 0;
+            x = normalBMP.Width;
+            for (int i = normalBMP.Width - 1; i >= 0; i--)
+            {
+               // colorMatrix[x] = new Color[normalBMP.Height];
+                y =0;
+                for (int j = 0; j < normalBMP.Height; j++)
+                {
+                    rotatedPic.SetPixel(x,y,normalBMP.GetPixel(i, j));
+                    y++;
+                }
+                x++;
+            }
+
+            //pictureBox2.Size = new Size(normalBMP.Width, normalBMP.Height);
+            //pictureBox2.Image = rotatedPic;
+            pictureBox1.Size = new Size(rotatedPic.Width, rotatedPic.Height);
+            normalBMP = rotatedPic;
+            pictureBox1.Image = normalBMP;
+           // didUserClickMirror = true;
         }
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -76,7 +93,7 @@ namespace Test
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            if(!didUserClickMirror)
+           // if(!didUserClickMirror)
             mirrorImage();
 
         }
@@ -115,11 +132,11 @@ namespace Test
             }*/
            
             pictureBox1.Image = normalBMP;
-            if(didUserClickMirror)
-            pictureBox2.Image = rotatedPic;
+            //if(didUserClickMirror)
+           // pictureBox2.Image = rotatedPic;
         }
         Bitmap firstLoadPic;
-        OpenFileDialog ofd = new OpenFileDialog();
+        OpenFileDialog ofd;
         private void openFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Console.WriteLine("openFileTool");
@@ -137,7 +154,7 @@ namespace Test
                     colorMatrix = new Color[width][];
                     pictureBox1.Size = new Size(width, height);
                     pictureBox1.Location = new Point(0, 0);
-                    pictureBox2.Location = new Point(pictureBox1.Width, 0);
+                   // pictureBox2.Location = new Point(pictureBox1.Width, 0);
                     pictureBox1.Image = normalBMP;
                 }
             }
@@ -149,13 +166,38 @@ namespace Test
 
         private void reopenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            pictureBox2.Image = null;
-            didUserClickMirror = false;
-            rotatedPic = null;
+            //pictureBox2.Image = null;
+            //didUserClickMirror = false;
+           // rotatedPic = null;
             normalBMP = new Bitmap(ofd.FileName);
            // normalBMP = firstLoadPic;
             Console.WriteLine("Reopen called");
             pictureBox1.Image = null;
+            pictureBox1.Size = new Size(normalBMP.Width,normalBMP.Height);
+            pictureBox1.Image = normalBMP;
+        }
+
+        private void rotation_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void grayscale_Click(object sender, EventArgs e)
+        {
+            //Bitmap grayPht = new Bitmap(ofd.FileName);
+          
+            int a, b;
+
+            for (a = 0; a < normalBMP.Width; a++)
+            {
+                for (b = 0; b < normalBMP.Height; b++)
+                {
+                    Color pixelColor = normalBMP.GetPixel(a, b);
+                    int avg = (pixelColor.R + pixelColor.G + pixelColor.B) / 3;
+                    Color newColor = Color.FromArgb(avg, avg, avg);
+                    normalBMP.SetPixel(a, b, newColor);
+                }
+            }
+       
             pictureBox1.Image = normalBMP;
         }
     }
