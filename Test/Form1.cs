@@ -15,7 +15,7 @@ namespace Test
 {
     public partial class Form1 : Form
     {
-        public Bitmap normalBMP;
+        public static Bitmap normalBMP;
         public Boolean didUserClickMirror = false;
         Color[][] colorMatrix;
         public Bitmap rotatedPic;
@@ -136,7 +136,7 @@ namespace Test
            // pictureBox2.Image = rotatedPic;
         }
         Bitmap firstLoadPic;
-        OpenFileDialog ofd;
+        public static OpenFileDialog ofd;
         private void openFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Console.WriteLine("openFileTool");
@@ -147,7 +147,7 @@ namespace Test
                 {
                     //Image<Bgr, byte> imgInput = new Image<Bgr, byte>(ofd.FileName);
                     normalBMP = new Bitmap(ofd.FileName);
-                    firstLoadPic = new Bitmap(ofd.FileName);
+                    //firstLoadPic = new Bitmap(ofd.FileName);
                     //normalBMP = imgInput.Bitmap;
                     int height = normalBMP.Height;
                     int width = normalBMP.Width;
@@ -179,6 +179,24 @@ namespace Test
 
         private void rotation_Click(object sender, EventArgs e)
         {
+            /* int x = 0, y = 0;
+             Bitmap newBMP = new Bitmap(normalBMP.Height, normalBMP.Width);
+             for (int a = 0; a < normalBMP.Width; a++)
+             {
+                 x= 0;
+                 for (int b = normalBMP.Height-1; b >= 0; b--)
+                 {
+                     newBMP.SetPixel(x, y, normalBMP.GetPixel(a,b));
+                     x++;
+                 }
+                 y++;
+             }
+             normalBMP = newBMP;
+             pictureBox1.Size = newBMP.Size;
+             pictureBox1.Location = new Point(0, 0);
+             pictureBox1.Image = normalBMP;*/
+
+         
 
         }
         private void grayscale_Click(object sender, EventArgs e)
@@ -186,7 +204,6 @@ namespace Test
             //Bitmap grayPht = new Bitmap(ofd.FileName);
           
             int a, b;
-
             for (a = 0; a < normalBMP.Width; a++)
             {
                 for (b = 0; b < normalBMP.Height; b++)
@@ -197,8 +214,82 @@ namespace Test
                     normalBMP.SetPixel(a, b, newColor);
                 }
             }
-       
             pictureBox1.Image = normalBMP;
+        }
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.Shift && e.KeyCode == Keys.P)
+            {
+                MessageBox.Show("Hello");
+            }
+        }
+
+        private void keyPress(object sender, KeyPressEventArgs e)
+        {
+           
+                
+            
+        }
+
+        private void keyPress(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.Add)
+            {
+                Form2 form2 = new Form2();
+                form2.Show();
+            }
+            if(e.Control && e.KeyCode == Keys.D)
+            {
+                int x = 0, y = 0;
+                Bitmap newBMP = new Bitmap(normalBMP.Height, normalBMP.Width);
+                for (int a = 0; a < normalBMP.Width; a++)
+                {
+                    x = 0;
+                    for (int b = normalBMP.Height - 1; b >= 0; b--)
+                    {
+                        newBMP.SetPixel(x, y, normalBMP.GetPixel(a, b));
+                        x++;
+                    }
+                    y++;
+                }
+                normalBMP = newBMP;
+                pictureBox1.Size = newBMP.Size;
+                pictureBox1.Location = new Point(0, 0);
+                pictureBox1.Image = normalBMP;
+
+            }
+            if (e.Control && e.KeyCode == Keys.A)
+            {
+                int x = 0, y = 0;
+                Bitmap newBMP = new Bitmap(normalBMP.Height, normalBMP.Width);
+                for (int a = normalBMP.Width-1; a >= 0; a--)
+                {
+                    x = 0;
+                    for (int b = 0; b < normalBMP.Height; b++)
+                    {
+                        newBMP.SetPixel(x, y, normalBMP.GetPixel(a, b));
+                        x++;
+                    }
+                    y++;
+                }
+                normalBMP = newBMP;
+                pictureBox1.Size = newBMP.Size;
+                pictureBox1.Location = new Point(0, 0);
+                pictureBox1.Image = normalBMP;
+
+            }
+        }
+
+        private void histogram_Click(object sender, EventArgs e)
+        {
+            Histogram histogram = new Histogram();
+            histogram.Show();
+        }
+
+        private void rgbchannel_Click(object sender, EventArgs e)
+        {
+            Form2 rgb = new Form2();
+            rgb.Show();
         }
     }
 }

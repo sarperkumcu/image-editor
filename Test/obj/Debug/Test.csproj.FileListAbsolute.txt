@@ -46,3 +46,5 @@ C:\Users\Sapo\Desktop\image-editor\image-editor\Test\obj\Debug\Test.csproj.Gener
 C:\Users\Sapo\Desktop\image-editor\image-editor\Test\obj\Debug\Test.csproj.CoreCompileInputs.cache
 C:\Users\Sapo\Desktop\image-editor\image-editor\Test\obj\Debug\Test.exe
 C:\Users\Sapo\Desktop\image-editor\image-editor\Test\obj\Debug\Test.pdb
+C:\Users\Sapo\Desktop\image-editor\image-editor\Test\obj\Debug\Test.Form2.resources
+C:\Users\Sapo\Desktop\image-editor\image-editor\Test\obj\Debug\Test.Histogram.resources

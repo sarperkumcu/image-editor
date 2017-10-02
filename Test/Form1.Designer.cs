@@ -40,6 +40,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.rotation = new System.Windows.Forms.Button();
             this.grayscale = new System.Windows.Forms.Button();
+            this.histogram = new System.Windows.Forms.Button();
+            this.rgbchannel = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -55,6 +57,7 @@
             this.menuStrip1.Size = new System.Drawing.Size(1058, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyPress);
             // 
             // fileToolStripMenuItem
             // 
@@ -157,21 +160,46 @@
             this.grayscale.UseVisualStyleBackColor = true;
             this.grayscale.Click += new System.EventHandler(this.grayscale_Click);
             // 
+            // histogram
+            // 
+            this.histogram.Location = new System.Drawing.Point(410, 32);
+            this.histogram.Name = "histogram";
+            this.histogram.Size = new System.Drawing.Size(75, 23);
+            this.histogram.TabIndex = 6;
+            this.histogram.Text = "histogram";
+            this.histogram.UseVisualStyleBackColor = true;
+            this.histogram.Click += new System.EventHandler(this.histogram_Click);
+            // 
+            // rgbchannel
+            // 
+            this.rgbchannel.Location = new System.Drawing.Point(492, 31);
+            this.rgbchannel.Name = "rgbchannel";
+            this.rgbchannel.Size = new System.Drawing.Size(75, 23);
+            this.rgbchannel.TabIndex = 7;
+            this.rgbchannel.Text = "RGB";
+            this.rgbchannel.UseVisualStyleBackColor = true;
+            this.rgbchannel.Click += new System.EventHandler(this.rgbchannel_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1058, 526);
+            this.Controls.Add(this.rgbchannel);
+            this.Controls.Add(this.histogram);
             this.Controls.Add(this.grayscale);
             this.Controls.Add(this.rotation);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyPress);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.keyPress);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -195,6 +223,8 @@
         private System.Windows.Forms.ToolStripMenuItem reopenToolStripMenuItem;
         private System.Windows.Forms.Button rotation;
         private System.Windows.Forms.Button grayscale;
+        private System.Windows.Forms.Button histogram;
+        private System.Windows.Forms.Button rgbchannel;
     }
 }
 
