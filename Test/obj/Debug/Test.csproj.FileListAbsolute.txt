@@ -39,7 +39,6 @@ C:\Users\Sapo\Desktop\image-editor\image-editor\Test\bin\Debug\Microsoft.VisualS
 C:\Users\Sapo\Desktop\image-editor\image-editor\Test\bin\Debug\Emgu.CV.UI.xml
 C:\Users\Sapo\Desktop\image-editor\image-editor\Test\bin\Debug\Emgu.CV.UI.GL.xml
 C:\Users\Sapo\Desktop\image-editor\image-editor\Test\bin\Debug\Emgu.CV.World.xml
-C:\Users\Sapo\Desktop\image-editor\image-editor\Test\obj\Debug\Test.csprojResolveAssemblyReference.cache
 C:\Users\Sapo\Desktop\image-editor\image-editor\Test\obj\Debug\Test.Form1.resources
 C:\Users\Sapo\Desktop\image-editor\image-editor\Test\obj\Debug\Test.Properties.Resources.resources
 C:\Users\Sapo\Desktop\image-editor\image-editor\Test\obj\Debug\Test.csproj.GenerateResource.Cache
@@ -48,3 +47,4 @@ C:\Users\Sapo\Desktop\image-editor\image-editor\Test\obj\Debug\Test.exe
 C:\Users\Sapo\Desktop\image-editor\image-editor\Test\obj\Debug\Test.pdb
 C:\Users\Sapo\Desktop\image-editor\image-editor\Test\obj\Debug\Test.Form2.resources
 C:\Users\Sapo\Desktop\image-editor\image-editor\Test\obj\Debug\Test.Histogram.resources
+C:\Users\Sapo\Desktop\image-editor\image-editor\Test\obj\Debug\Test.csprojResolveAssemblyReference.cache
