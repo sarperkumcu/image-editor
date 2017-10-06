@@ -57,6 +57,7 @@
             this.menuStrip1.Size = new System.Drawing.Size(1058, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             this.menuStrip1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyPress);
             // 
             // fileToolStripMenuItem

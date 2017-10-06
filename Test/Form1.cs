@@ -30,6 +30,9 @@ namespace Test
             //InitializeComponent();
             this.Text = "Empty File";
             this.BackColor = Color.FromArgb(27, 26, 26);
+            this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(pictureBox1);
+            //this.panel1.AutoScrollMinSize = new Size(formWh*2, formHei*2);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -154,10 +157,11 @@ namespace Test
         {
             Bitmap image = new Bitmap(fileName);
             double wh=image.Width, hei=image.Height;
-            while(wh > pictureBox1.Parent.ClientSize.Width || hei > pictureBox1.Parent.ClientSize.Height)
+            if (wh > formWh || hei > formHei)
+                while (wh  > formWh || hei  > formHei)
             {
-                wh /= 1.0001;
-                hei /= 1.0001;
+                wh /= 1.001;
+                hei /= 1.001;
             }
             image = new Bitmap(image, new Size((int)wh, (int)hei));
             return image;
@@ -166,13 +170,32 @@ namespace Test
         {
             Bitmap image =im ;
             double wh = image.Width, hei = image.Height;
-            
-            while (wh > formWh || hei > formHei)
+            if(wh > formWh || hei > formHei)
             {
-                wh /= 1.001;
-                hei /= 1.001;
+                while (wh > formWh || hei > formHei)
+                     {
+                          wh /= 1.001;
+                          hei /= 1.001;
+                     }
             }
-            image = new Bitmap(image, new Size((int)wh, (int)hei));
+
+            else
+            {
+                while ((wh ) < formWh && (hei) <formHei)
+                     {
+                          wh *= 1.001;
+                          hei *= 1.001;
+                     }
+            }
+            Bitmap newPic = new Bitmap((int)wh,(int) hei);
+            using (Graphics gr = Graphics.FromImage(newPic))
+            {
+                gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                gr.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+                gr.DrawImage(im, new Rectangle(0, 0, (int)wh, (int)hei));
+            }
+            image = newPic;
             resized = true;
             return image;
         }
@@ -186,8 +209,8 @@ namespace Test
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     //Image<Bgr, byte> imgInput = new Image<Bgr, byte>(ofd.FileName);
-                    // normalBMP = autoResize(ofd.FileName);
-                    normalBMP = new Bitmap(ofd.FileName);
+                     normalBMP = autoResize(ofd.FileName);
+                    //normalBMP = new Bitmap(ofd.FileName);
                     pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
                     pictureBox1.Anchor = AnchorStyles.None;
                     pictureBox1.Image = normalBMP;
@@ -317,10 +340,11 @@ namespace Test
                
                 pictureBox1.Location = new Point((pictureBox1.Parent.ClientSize.Width / 2) - (newBMP.Width / 2),
                              (pictureBox1.Parent.ClientSize.Height / 2) - (newBMP.Height / 2));
-                pictureBox1.Refresh();
                 pictureBox1.Size = newBMP.Size;
                 //pictureBox1.Location = new Point(0, 0);
                 pictureBox1.Image = normalBMP;
+                pictureBox1.Refresh();
+
 
             }
             if (e.Control && e.KeyCode == Keys.A)
@@ -362,6 +386,11 @@ namespace Test
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
         }
