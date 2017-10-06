@@ -32,6 +32,7 @@ namespace Test
             this.BackColor = Color.FromArgb(27, 26, 26);
             this.panel1.AutoScroll = true;
             this.panel1.Controls.Add(pictureBox1);
+            this.panel2.BackColor = Color.FromArgb(25, 18, 18);
             //this.panel1.AutoScrollMinSize = new Size(formWh*2, formHei*2);
         }
 
@@ -181,7 +182,8 @@ namespace Test
 
             else
             {
-                while ((wh ) < formWh && (hei) <formHei)
+                if(!((wh >= mainPicWh) && (hei >= mainPicHei)))
+                while ((wh  < formWh && hei < formHei))
                      {
                           wh *= 1.001;
                           hei *= 1.001;
@@ -219,8 +221,9 @@ namespace Test
                     pictureBox1.Refresh();
                     //firstLoadPic = new Bitmap(ofd.FileName);
                     //normalBMP = imgInput.Bitmap;
-                    int height = normalBMP.Height;
-                    int width = normalBMP.Width;
+                    int height = mainPicHei = normalBMP.Height;
+                    int width = mainPicWh = normalBMP.Width;
+                    
                     colorMatrix = new Color[width][];
                    // pictureBox1.Size = new Size(width, height);
                    // pictureBox1.Location = new Point(0, 0);
@@ -261,16 +264,18 @@ namespace Test
         private void rotation_Click(object sender, EventArgs e)
         {
             Bitmap image = normalBMP;
-             String whS = Interaction.InputBox("Bilgi Girişi", "Adınızı Giriniz.", "Örn: Ali", 0, 0);
-             //MessageBox.Show("Girilen isim: " + wh);
-             int wh = Int32.Parse(whS);
-            Bitmap newPic = new Bitmap(wh,500);
+             String whS = Interaction.InputBox("Width", "Yeniden Boyutlandır", "", 0, 0);
+            //MessageBox.Show("Girilen isim: " + wh);
+            String heiS = Interaction.InputBox("Height", "Yeniden Boyutlandır", "", 0, 0);
+            int wh = Int32.Parse(whS);
+            int hei = Int32.Parse(heiS);
+            Bitmap newPic = new Bitmap(wh,hei);
             using (Graphics gr = Graphics.FromImage(newPic))
             {
                 gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
                 gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
                 gr.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
-                gr.DrawImage(normalBMP, new Rectangle(0, 0, wh, 500));
+                gr.DrawImage(normalBMP, new Rectangle(0, 0, wh, hei));
             }
             normalBMP = newPic;
             pictureBox1.Size = new Size(normalBMP.Width, normalBMP.Height);
@@ -283,6 +288,8 @@ namespace Test
 
         int formWh = 1474;
         int formHei = 766;
+        int mainPicWh;
+        int mainPicHei;
         private void grayscale_Click(object sender, EventArgs e)
         {
             //Bitmap grayPht = new Bitmap(ofd.FileName);

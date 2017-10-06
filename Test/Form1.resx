@@ -120,4 +120,25 @@
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="histogram.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAACxMAAAsTAQCanBgAAADASURBVFhH7Y5BCsJQFMR6/0urC4WghiGLIkIDfzOvmelx
+        AW7P9zP+7gde31dPqUUcL55SizhePKUWcbx4Si3iePGUWsTx4im1iOPFU2oRx4un1CKO07N8UgWO0LN8
+        UgWO0LN8UgWO0LN8UgWO0LN8UgWO0LN8UgWO0LN8UgWO0LN8UgWO0LN8UgWO0LN8YgLLeK/5xASW8V7z
+        iQks473mExNYxnvNJyawjPeaT0xgGe81n7yLZ78Pvn105rt4cBx3YTQi7PT8uP4AAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="rgbchannel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAACxMAAAsTAQCanBgAAAEpSURBVFhH7ZRLDsMgDER9oZwmWTc9SnOxpr0Y7gwKEgkT
+        GqkLFmWkt/FHNjZgXUIDGMF0gDb6qnLEgBFMB2j7mr+AABAroe8BpBCwgAD8BPpO89ldrXiCMcVJ4ODJ
+        a8UTjJGT4IjhuwRjd4KRI1YFFUU+xT3DdwnG7gQj96yKKYp8qjfQvIHml7D5M6SafkRJ7I4j4p5yaDvt
+        PAkFfvqKu7rs/rZhftp4W23KoY2+LawiR4zjwjou7g7a6vnzy5Z5tQD8hHBfa8/I8YwdT1W9wAh9Oj+e
+        vF48EfQk4slrxROMKfM5YlFMg9gtLVMcsSqoKPPjnlUxAWO3tExxz6qYoszvDTRvoPklbP4MqaYfUVKc
+        BEbMPefQpk9+VJwE18E7kUPbhfz/ktkHOEJGClYfQAYAAAAASUVORK5CYII=
+</value>
+  </data>
 </root>

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,6 +43,7 @@
             this.grayscale = new System.Windows.Forms.Button();
             this.histogram = new System.Windows.Forms.Button();
             this.rgbchannel = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -166,35 +168,52 @@
             // 
             // histogram
             // 
+            this.histogram.Font = new System.Drawing.Font("Microsoft Sans Serif", 4.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.histogram.Image = ((System.Drawing.Image)(resources.GetObject("histogram.Image")));
+            this.histogram.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.histogram.Location = new System.Drawing.Point(1, 261);
             this.histogram.Name = "histogram";
-            this.histogram.Size = new System.Drawing.Size(75, 23);
+            this.histogram.Size = new System.Drawing.Size(75, 66);
             this.histogram.TabIndex = 6;
-            this.histogram.Text = "histogram";
+            this.histogram.Text = "Histogram";
+            this.histogram.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.histogram.UseVisualStyleBackColor = true;
             this.histogram.Click += new System.EventHandler(this.histogram_Click);
             // 
             // rgbchannel
             // 
-            this.rgbchannel.Location = new System.Drawing.Point(0, 290);
+            this.rgbchannel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, ((byte)(162)));
+            this.rgbchannel.Image = ((System.Drawing.Image)(resources.GetObject("rgbchannel.Image")));
+            this.rgbchannel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.rgbchannel.Location = new System.Drawing.Point(-2, 333);
             this.rgbchannel.Name = "rgbchannel";
-            this.rgbchannel.Size = new System.Drawing.Size(75, 23);
+            this.rgbchannel.Size = new System.Drawing.Size(75, 57);
             this.rgbchannel.TabIndex = 7;
-            this.rgbchannel.Text = "Channels";
+            this.rgbchannel.Text = "RGB";
+            this.rgbchannel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rgbchannel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.rgbchannel.UseVisualStyleBackColor = true;
             this.rgbchannel.Click += new System.EventHandler(this.rgbchannel_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.Location = new System.Drawing.Point(-2, 32);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(78, 482);
+            this.panel2.TabIndex = 8;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1058, 526);
-            this.Controls.Add(this.rgbchannel);
-            this.Controls.Add(this.histogram);
-            this.Controls.Add(this.grayscale);
-            this.Controls.Add(this.rotation);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
+            this.Controls.Add(this.rotation);
+            this.Controls.Add(this.grayscale);
+            this.Controls.Add(this.histogram);
+            this.Controls.Add(this.rgbchannel);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.KeyPreview = true;
@@ -229,6 +248,7 @@
         private System.Windows.Forms.Button grayscale;
         private System.Windows.Forms.Button histogram;
         private System.Windows.Forms.Button rgbchannel;
+        private System.Windows.Forms.Panel panel2;
     }
 }
 
