@@ -28,11 +28,20 @@ namespace Test
         private void Form1_Load(object sender, EventArgs e)
         {
             //InitializeComponent();
+            ToolTip rgpchannelToolTip = new ToolTip();
+            ToolTip histogramToolTip = new ToolTip();
+            ToolTip resizeToolTip = new ToolTip();
+            //ToolTip rgpchannelToolTip = new ToolTip();
+
             this.Text = "Empty File";
             this.BackColor = Color.FromArgb(27, 26, 26);
             this.panel1.AutoScroll = true;
             this.panel1.Controls.Add(pictureBox1);
             this.panel2.BackColor = Color.FromArgb(25, 18, 18);
+            rgpchannelToolTip.SetToolTip(rgbchannel, "RGB Channels");
+            histogramToolTip.SetToolTip(histogram, "Histogram");
+            resizeToolTip.SetToolTip(resize, "Scale");
+
             //this.panel1.AutoScrollMinSize = new Size(formWh*2, formHei*2);
         }
 
@@ -43,6 +52,12 @@ namespace Test
 
         private void mirrorImage()
         {
+            if (normalBMP == null)
+            {
+                MessageBox.Show("Error");
+                return;
+            }
+
             int x = 0;
             int y = 0;
           //  didUserClickMirror = true;
@@ -117,7 +132,13 @@ namespace Test
 
         private void button2_Click(object sender, EventArgs e)
         {
-           invertImage();
+            if (normalBMP == null)
+            {
+                MessageBox.Show("Error");
+                return;
+            }
+
+            invertImage();
         }
 
         private void invertImage()
@@ -240,9 +261,15 @@ namespace Test
 
         private void reopenToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (normalBMP == null)
+            {
+                MessageBox.Show("Error");
+                return;
+            }
+
             //Image<Bgr, byte> imgInput = new Image<Bgr, byte>(ofd.FileName);
             // normalBMP = autoResize(ofd.FileName);
-            normalBMP = new Bitmap(ofd.FileName);
+            normalBMP = autoResize(ofd.FileName);
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
             pictureBox1.Anchor = AnchorStyles.None;
             pictureBox1.Image = normalBMP;
@@ -263,26 +290,6 @@ namespace Test
 
         private void rotation_Click(object sender, EventArgs e)
         {
-            Bitmap image = normalBMP;
-             String whS = Interaction.InputBox("Width", "Yeniden Boyutlandır", "", 0, 0);
-            //MessageBox.Show("Girilen isim: " + wh);
-            String heiS = Interaction.InputBox("Height", "Yeniden Boyutlandır", "", 0, 0);
-            int wh = Int32.Parse(whS);
-            int hei = Int32.Parse(heiS);
-            Bitmap newPic = new Bitmap(wh,hei);
-            using (Graphics gr = Graphics.FromImage(newPic))
-            {
-                gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-                gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-                gr.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
-                gr.DrawImage(normalBMP, new Rectangle(0, 0, wh, hei));
-            }
-            normalBMP = newPic;
-            pictureBox1.Size = new Size(normalBMP.Width, normalBMP.Height);
-            pictureBox1.Location = new Point((pictureBox1.Parent.ClientSize.Width / 2) - (normalBMP.Width /2) ,
-                             (pictureBox1.Parent.ClientSize.Height / 2) - (normalBMP.Height / 2));
-            pictureBox1.Refresh();
-            pictureBox1.Image = normalBMP;
 
         }
 
@@ -293,7 +300,12 @@ namespace Test
         private void grayscale_Click(object sender, EventArgs e)
         {
             //Bitmap grayPht = new Bitmap(ofd.FileName);
-          
+            if (normalBMP == null)
+            {
+                MessageBox.Show("Error");
+                return;
+            }
+
             int a, b;
             for (a = 0; a < normalBMP.Width; a++)
             {
@@ -322,6 +334,68 @@ namespace Test
             
         }
 
+        private void rotateRight()
+        {
+            if (normalBMP == null)
+            {
+                MessageBox.Show("Error");
+                return;
+            }
+
+            int x = 0, y = 0;
+            Bitmap newBMP = new Bitmap(normalBMP.Height, normalBMP.Width);
+            for (int a = 0; a < normalBMP.Width; a++)
+            {
+                x = 0;
+                for (int b = normalBMP.Height - 1; b >= 0; b--)
+                {
+                    newBMP.SetPixel(x, y, normalBMP.GetPixel(a, b));
+                    x++;
+                }
+                y++;
+            }
+            normalBMP = newBMP = autoResize(newBMP);
+
+            pictureBox1.Location = new Point((pictureBox1.Parent.ClientSize.Width / 2) - (newBMP.Width / 2),
+                         (pictureBox1.Parent.ClientSize.Height / 2) - (newBMP.Height / 2));
+            pictureBox1.Size = newBMP.Size;
+            //pictureBox1.Location = new Point(0, 0);
+            pictureBox1.Image = normalBMP;
+            pictureBox1.Refresh();
+
+        }
+
+        private void rotateLeft()
+        {
+            if (normalBMP == null)
+            {
+                MessageBox.Show("Error");
+                return;
+            }
+
+            int x = 0, y = 0;
+            Bitmap newBMP = new Bitmap(normalBMP.Height, normalBMP.Width);
+            for (int a = normalBMP.Width - 1; a >= 0; a--)
+            {
+                x = 0;
+                for (int b = 0; b < normalBMP.Height; b++)
+                {
+                    newBMP.SetPixel(x, y, normalBMP.GetPixel(a, b));
+                    x++;
+                }
+                y++;
+            }
+            normalBMP = newBMP = autoResize(newBMP);
+
+            pictureBox1.Location = new Point((pictureBox1.Parent.ClientSize.Width / 2) - (newBMP.Width / 2),
+                         (pictureBox1.Parent.ClientSize.Height / 2) - (newBMP.Height / 2));
+            pictureBox1.Refresh();
+            pictureBox1.Size = newBMP.Size;
+            //pictureBox1.Location = new Point(0, 0);
+            pictureBox1.Image = normalBMP;
+
+        }
+
         private void keyPress(object sender, KeyEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.Add)
@@ -331,65 +405,32 @@ namespace Test
             }
             if(e.Control && e.KeyCode == Keys.D)
             {
-                int x = 0, y = 0;
-                Bitmap newBMP = new Bitmap(normalBMP.Height, normalBMP.Width);
-                for (int a = 0; a < normalBMP.Width; a++)
-                {
-                    x = 0;
-                    for (int b = normalBMP.Height - 1; b >= 0; b--)
-                    {
-                        newBMP.SetPixel(x, y, normalBMP.GetPixel(a, b));
-                        x++;
-                    }
-                    y++;
-                }
-                normalBMP = newBMP = autoResize(newBMP);
-               
-                pictureBox1.Location = new Point((pictureBox1.Parent.ClientSize.Width / 2) - (newBMP.Width / 2),
-                             (pictureBox1.Parent.ClientSize.Height / 2) - (newBMP.Height / 2));
-                pictureBox1.Size = newBMP.Size;
-                //pictureBox1.Location = new Point(0, 0);
-                pictureBox1.Image = normalBMP;
-                pictureBox1.Refresh();
-
-
+                rotateRight();
             }
             if (e.Control && e.KeyCode == Keys.A)
             {
-                int x = 0, y = 0;
-                Bitmap newBMP = new Bitmap(normalBMP.Height, normalBMP.Width);
-                for (int a = normalBMP.Width-1; a >= 0; a--)
-                {
-                    x = 0;
-                    for (int b = 0; b < normalBMP.Height; b++)
-                    {
-                        newBMP.SetPixel(x, y, normalBMP.GetPixel(a, b));
-                        x++;
-                    }
-                    y++;
-                }
-                normalBMP = newBMP = autoResize(newBMP);
-
-                pictureBox1.Location = new Point((pictureBox1.Parent.ClientSize.Width / 2) - (newBMP.Width / 2),
-                             (pictureBox1.Parent.ClientSize.Height / 2) - (newBMP.Height / 2));
-                pictureBox1.Refresh();
-                pictureBox1.Size = newBMP.Size;
-                //pictureBox1.Location = new Point(0, 0);
-                pictureBox1.Image = normalBMP;
-
+                rotateLeft();
             }
         }
 
         private void histogram_Click(object sender, EventArgs e)
         {
             Histogram histogram = new Histogram();
-            histogram.Show();
+            if (normalBMP != null)
+                histogram.Show();
+            else
+                MessageBox.Show("Error");
+            
+           
         }
 
         private void rgbchannel_Click(object sender, EventArgs e)
         {
             Form2 rgb = new Form2();
-            rgb.Show();
+            if (normalBMP != null)
+                rgb.Show();
+            else
+                MessageBox.Show("Error");
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -398,6 +439,21 @@ namespace Test
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void rotateLeftButton_Click(object sender, EventArgs e)
+        {
+            rotateLeft();
+        }
+
+        private void rotateRightButton_Click(object sender, EventArgs e)
+        {
+            rotateRight();
+        }
+
+        private void resize_Click(object sender, EventArgs e)
         {
 
         }
