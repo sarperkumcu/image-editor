@@ -455,7 +455,31 @@ namespace Test
 
         private void resize_Click(object sender, EventArgs e)
         {
-
+            if(normalBMP == null)
+            {
+                MessageBox.Show("Error");
+                return;
+            }
+            Bitmap image = normalBMP;
+            String whS = Interaction.InputBox("Width", "Yeniden Boyutlandır", "", 0, 0);
+            //MessageBox.Show("Girilen isim: " + wh);
+            String heiS = Interaction.InputBox("Height", "Yeniden Boyutlandır", "", 0, 0);
+            int wh = Int32.Parse(whS);
+            int hei = Int32.Parse(heiS);
+            Bitmap newPic = new Bitmap(wh, hei);
+            using (Graphics gr = Graphics.FromImage(newPic))
+            {
+                gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                gr.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+                gr.DrawImage(normalBMP, new Rectangle(0, 0, wh, hei));
+            }
+            normalBMP = newPic;
+            pictureBox1.Size = new Size(normalBMP.Width, normalBMP.Height);
+            pictureBox1.Location = new Point((pictureBox1.Parent.ClientSize.Width / 2) - (normalBMP.Width / 2),
+                             (pictureBox1.Parent.ClientSize.Height / 2) - (normalBMP.Height / 2));
+            pictureBox1.Refresh();
+            pictureBox1.Image = normalBMP;
         }
     }
 }
