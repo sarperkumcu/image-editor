@@ -131,6 +131,12 @@
     <None Include="Resources\rotateR.png" />
     <None Include="Resources\red-green-blue-three-rgb-circles-symbol.png" />
     <None Include="Resources\if_mirror_298828.png" />
+    <None Include="Resources\greyscale.png" />
+    <None Include="Resources\greyscale.jpg" />
+    <None Include="Resources\Başlıksız-2.jpg" />
+    <None Include="Resources\test.png" />
+    <None Include="Resources\Başlıksız-3.jpg" />
+    <None Include="Resources\imageedit_1_8276654038.png" />
     <Content Include="vcruntime140.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

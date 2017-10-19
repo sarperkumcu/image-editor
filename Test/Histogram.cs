@@ -63,7 +63,7 @@ namespace Test
                     float pct = histogram_GREY[i] / maxGREY;   // What percentage of the max is this value?
                     g.DrawLine(Pens.Gray,
                         new Point(i, img.Height - 5),
-                        new Point(i, img.Height - 5 - (int)(pct * histHeight))  // Use that percentage of the height
+                        new Point(i, img.Height - 5 - (int)(pct * histHeight)*7)  // Use that percentage of the height
                         );
                 }
             }
@@ -80,7 +80,7 @@ namespace Test
                     float pct = histogram_R[i] / maxR;   // What percentage of the max is this value?
                     g.DrawLine(Pens.Red,
                         new Point(i, img.Height - 5),
-                        new Point(i, img.Height - 5 - (int)(pct * histHeight))  // Use that percentage of the height
+                        new Point(i, img.Height - 5 - (int)(pct * histHeight)*7)  // Use that percentage of the height
                         );
                 }
             }
@@ -98,7 +98,7 @@ namespace Test
                     float pct = histogram_G[i] / maxG;   // What percentage of the max is this value?
                     g.DrawLine(Pens.Green,
                         new Point(i, img.Height - 5),
-                        new Point(i, img.Height - 5 - (int)(pct * histHeight))  // Use that percentage of the height
+                        new Point(i, img.Height - 5 - (int)(pct * histHeight)*7)  // Use that percentage of the height
                         );
                 }
             }
@@ -115,7 +115,7 @@ namespace Test
                     float pct = histogram_B[i] / maxR;   // What percentage of the max is this value?
                     g.DrawLine(Pens.Blue,
                         new Point(i, img.Height - 5),
-                        new Point(i, img.Height - 5 - (int)(pct * histHeight))  // Use that percentage of the height
+                        new Point(i, img.Height - 5 - (int)(pct * histHeight)*7)  // Use that percentage of the height
                         );
                 }
             }

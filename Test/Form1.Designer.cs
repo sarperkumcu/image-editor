@@ -37,11 +37,11 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
-            this.grayscale = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.resize = new System.Windows.Forms.Button();
             this.rotateRightButton = new System.Windows.Forms.Button();
+            this.grayscale = new System.Windows.Forms.Button();
             this.rotateLeftButton = new System.Windows.Forms.Button();
             this.rgbchannel = new System.Windows.Forms.Button();
             this.histogram = new System.Windows.Forms.Button();
@@ -111,6 +111,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
+            this.panel1.AutoSize = true;
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Location = new System.Drawing.Point(82, 32);
             this.panel1.Name = "panel1";
@@ -127,16 +128,6 @@
             this.button2.Text = "invert";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // grayscale
-            // 
-            this.grayscale.Location = new System.Drawing.Point(3, 189);
-            this.grayscale.Name = "grayscale";
-            this.grayscale.Size = new System.Drawing.Size(75, 56);
-            this.grayscale.TabIndex = 5;
-            this.grayscale.Text = "Grayscale";
-            this.grayscale.UseVisualStyleBackColor = true;
-            this.grayscale.Click += new System.EventHandler(this.grayscale_Click);
             // 
             // panel2
             // 
@@ -183,6 +174,16 @@
             this.rotateRightButton.TabIndex = 9;
             this.rotateRightButton.UseVisualStyleBackColor = true;
             this.rotateRightButton.Click += new System.EventHandler(this.rotateRightButton_Click);
+            // 
+            // grayscale
+            // 
+            this.grayscale.Image = global::Test.Properties.Resources.imageedit_1_8276654038;
+            this.grayscale.Location = new System.Drawing.Point(3, 189);
+            this.grayscale.Name = "grayscale";
+            this.grayscale.Size = new System.Drawing.Size(75, 56);
+            this.grayscale.TabIndex = 5;
+            this.grayscale.UseVisualStyleBackColor = true;
+            this.grayscale.Click += new System.EventHandler(this.grayscale_Click);
             // 
             // rotateLeftButton
             // 
