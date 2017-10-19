@@ -75,7 +75,7 @@ namespace Test
             }
 
 
-            rotatedPic = new Bitmap(normalBMP.Width*2, normalBMP.Height);
+            rotatedPic = new Bitmap(normalBMP.Width, normalBMP.Height);
             y = 0;
             x = normalBMP.Width;
             processList.Add(normalBMP);
@@ -87,8 +87,8 @@ namespace Test
                 for (int j = 0; j < normalBMP.Height; j++)
                 {
                     //colorMatrix[i][j] = bmp.GetPixel(i,j);
-                    rotatedPic.SetPixel(i, j, normalBMP.GetPixel(i,j));
-                    rotatedPic.SetPixel(x, y, normalBMP.GetPixel(z,j));
+                   // rotatedPic.SetPixel(i, j, normalBMP.GetPixel(i,j));
+                    rotatedPic.SetPixel(i, j, normalBMP.GetPixel(z,j));
                     y++;
                 }
                 x++;
@@ -109,11 +109,11 @@ namespace Test
 
             //pictureBox2.Size = new Size(normalBMP.Width, normalBMP.Height);
             //pictureBox2.Image = rotatedPic;
-            rotatedPic = autoResize(rotatedPic);
+            /*rotatedPic = autoResize(rotatedPic);
              pictureBox1.Location = new Point((pictureBox1.Parent.ClientSize.Width / 2) - (rotatedPic.Width / 2),
                                (pictureBox1.Parent.ClientSize.Height / 2) - (rotatedPic.Height / 2));
              pictureBox1.Refresh();
-             pictureBox1.Size = new Size(rotatedPic.Width, rotatedPic.Height);
+             pictureBox1.Size = new Size(rotatedPic.Width, rotatedPic.Height);*/
              normalBMP = rotatedPic;
              pictureBox1.Image = normalBMP;
            // didUserClickMirror = true;
