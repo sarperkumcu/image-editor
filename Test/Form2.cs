@@ -31,7 +31,7 @@ namespace Test
                 {
                     Color pixelColor = pic.GetPixel(i, j);
                     int avg = (pixelColor.R + pixelColor.G + pixelColor.B) / 3;
-                    Color newColor = Color.FromArgb(pixelColor.R, 0, 0);
+                    Color newColor = Color.FromArgb(pixelColor.R, pixelColor.R,pixelColor.R );
                     pic.SetPixel(i, j, newColor);
                 }
             }
@@ -44,7 +44,7 @@ namespace Test
                     {
                         Color pixelColor = pic.GetPixel(i, j);
                         int avg = (pixelColor.R + pixelColor.G + pixelColor.B) / 3;
-                        Color newColor = Color.FromArgb(0, pixelColor.G, 0);
+                        Color newColor = Color.FromArgb(pixelColor.G, pixelColor.G, pixelColor.G);
                         pic.SetPixel(i, j, newColor);
                     }
                 }
@@ -57,7 +57,7 @@ namespace Test
                     {
                         Color pixelColor = pic.GetPixel(i, j);
                         int avg = (pixelColor.R + pixelColor.G + pixelColor.B) / 3;
-                        Color newColor = Color.FromArgb(0, 0, pixelColor.B);
+                        Color newColor = Color.FromArgb(pixelColor.B, pixelColor.B, pixelColor.B);
                         pic.SetPixel(i, j, newColor);
                     }
                 }
