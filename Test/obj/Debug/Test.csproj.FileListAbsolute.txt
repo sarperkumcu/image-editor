@@ -95,3 +95,4 @@ C:\Users\Sapo\Desktop\bedonepls\image-editor\Test\obj\Debug\Test.csproj.Generate
 C:\Users\Sapo\Desktop\bedonepls\image-editor\Test\obj\Debug\Test.csproj.CoreCompileInputs.cache
 C:\Users\Sapo\Desktop\bedonepls\image-editor\Test\obj\Debug\Test.exe
 C:\Users\Sapo\Desktop\bedonepls\image-editor\Test\obj\Debug\Test.pdb
+C:\Users\Sapo\Desktop\bedonepls\image-editor\Test\obj\Debug\Test.resize.resources

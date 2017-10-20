@@ -16,7 +16,7 @@ namespace Test
 {
     public partial class Form1 : Form
     {
-        public static Bitmap normalBMP;
+        public Bitmap normalBMP;
         public Boolean didUserClickMirror = false;
         Color[][] colorMatrix;
         public Bitmap rotatedPic;
@@ -37,7 +37,7 @@ namespace Test
             this.BackColor = Color.FromArgb(27, 26, 26);
             this.panel1.AutoScroll = true;
             this.panel1.Controls.Add(pictureBox1);
-            this.panel2.BackColor = Color.FromArgb(25, 18, 18);
+            this.panel2.BackColor = Color.FromArgb(36, 35, 35);
             rgpchannelToolTip.SetToolTip(rgbchannel, "RGB Channels");
             histogramToolTip.SetToolTip(histogram, "Histogram");
             resizeToolTip.SetToolTip(resize, "Scale");
@@ -138,7 +138,6 @@ namespace Test
                 MessageBox.Show("Error");
                 return;
             }
-            processList.Add(normalBMP);
             invertImage();
         }
 
@@ -161,7 +160,7 @@ namespace Test
 
             }
 
-          //  Bitmap newPic= normalBMP;
+            //  Bitmap newPic= normalBMP;
             /*for (int i = 0; i < normalBMP.Width; i++)
             {
                 //colorMatrix[i] = new Color[height];
@@ -170,19 +169,24 @@ namespace Test
                    newPic.SetPixel(i, j, rotatedPicMatrix[i][j]);
                 }
             }*/
-           
-            pictureBox1.Image = invertedPic;
-            normalBMP = invertedPic;
+           // normalBMP = invertedPic;
+
+            pictureBox1.Image = normalBMP;
+            processList.Add(normalBMP);
+
+            // rotateLeft();
             //if(didUserClickMirror)
-           // pictureBox2.Image = rotatedPic;
+            // pictureBox2.Image = rotatedPic;
         }
+        double imageAutoScaledWidth;
+        double imageAutoScaledHeight;
         public static String filename;
         public static OpenFileDialog ofd;
         private Bitmap autoResize(String fileName)
         {
             Bitmap image = new Bitmap(fileName);
             double wh=image.Width, hei=image.Height;
-            if (wh > formWh || hei > formHei)
+            if (wh >formWh || hei > formHei)
             {
                 autoScaledAtFirst = true;
                 while (wh  > formWh || hei  > formHei)
@@ -191,14 +195,15 @@ namespace Test
                 hei /= 1.001;
              }
             }
-            
+            imageAutoScaledHeight = hei;
+            imageAutoScaledWidth = wh;
             image = new Bitmap(image, new Size((int)wh, (int)hei));
             return image;
         }
         public bool autoScaledAtFirst = false;
         private Bitmap autoResize(Bitmap im)
         {
-            Bitmap image =im ;
+            Bitmap image = im ;
             double wh = image.Width, hei = image.Height;
             if((wh > formWh || hei > formHei))
             {
@@ -212,10 +217,15 @@ namespace Test
             else
             {
                 if(!((wh >= mainPicWh) && (hei >= mainPicHei)) && autoScaledAtFirst == true)
-                while ((wh  < formWh && hei < formHei))
+                {
+                  /*  wh = imageAutoScaledHeight;
+                    hei = imageAutoScaledWidth;*/
+                
+               while ((wh  < imageAutoScaledWidth && hei < imageAutoScaledHeight))
                      {
                           wh *= 1.001;
                           hei *= 1.001;
+                     }
                      }
             }
             Bitmap newPic = new Bitmap((int)wh,(int) hei);
@@ -240,26 +250,28 @@ namespace Test
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     //Image<Bgr, byte> imgInput = new Image<Bgr, byte>(ofd.FileName);
+                    processList = new List<Bitmap>();
+                    autoScaledAtFirst = false;
                      normalBMP = autoResize(ofd.FileName);
                     filename = ofd.FileName;
                     //normalBMP = new Bitmap(ofd.FileName);
                     pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
                     pictureBox1.Anchor = AnchorStyles.None;
-                    pictureBox1.Image = normalBMP;
                     pictureBox1.Location = new Point((pictureBox1.Parent.ClientSize.Width / 2) - (normalBMP.Width / 2),
                                                 (pictureBox1.Parent.ClientSize.Height / 2) - (normalBMP.Height / 2));
+                    pictureBox1.Image = normalBMP;
                     pictureBox1.Refresh();
                     //firstLoadPic = new Bitmap(ofd.FileName);
                     //normalBMP = imgInput.Bitmap;
                     int height = mainPicHei = normalBMP.Height;
                     int width = mainPicWh = normalBMP.Width;
-                    
                     colorMatrix = new Color[width][];
                    // pictureBox1.Size = new Size(width, height);
                    // pictureBox1.Location = new Point(0, 0);
                    // pictureBox2.Location = new Point(pictureBox1.Width, 0);
                     pictureBox1.Image = normalBMP;
                     this.Text = ofd.FileName;
+                    processList.Add(normalBMP);
                 }
             }
             catch (Exception ex)
@@ -279,6 +291,7 @@ namespace Test
             //Image<Bgr, byte> imgInput = new Image<Bgr, byte>(ofd.FileName);
             // normalBMP = autoResize(ofd.FileName);
             normalBMP = autoResize(filename);
+            processList = new List<Bitmap>();
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
             pictureBox1.Anchor = AnchorStyles.None;
             pictureBox1.Image = normalBMP;
@@ -289,12 +302,14 @@ namespace Test
             //normalBMP = imgInput.Bitmap;
             int height = normalBMP.Height;
             int width = normalBMP.Width;
-            colorMatrix = new Color[width][];
+           // colorMatrix = new Color[width][];
             // pictureBox1.Size = new Size(width, height);
             // pictureBox1.Location = new Point(0, 0);
             // pictureBox2.Location = new Point(pictureBox1.Width, 0);
             pictureBox1.Image = normalBMP;
             this.Text = ofd.FileName;
+            processList.Add(normalBMP);
+
         }
 
         private void rotation_Click(object sender, EventArgs e)
@@ -314,7 +329,8 @@ namespace Test
                 MessageBox.Show("Error");
                 return;
             }
-            processList.Add(normalBMP);
+            Bitmap bmp = normalBMP;
+            processList.Add(bmp);
 
             int a, b;
             for (a = 0; a < normalBMP.Width; a++)
@@ -365,7 +381,6 @@ namespace Test
                 y++;
             }
             normalBMP = newBMP = autoResize(newBMP);
-
             pictureBox1.Location = new Point((pictureBox1.Parent.ClientSize.Width / 2) - (newBMP.Width / 2),
                          (pictureBox1.Parent.ClientSize.Height / 2) - (newBMP.Height / 2));
             pictureBox1.Size = newBMP.Size;
@@ -403,6 +418,8 @@ namespace Test
             pictureBox1.Size = newBMP.Size;
             //pictureBox1.Location = new Point(0, 0);
             pictureBox1.Image = normalBMP;
+            pictureBox1.Refresh();
+
 
         }
 
@@ -443,17 +460,19 @@ namespace Test
 
             if(e.Control && e.KeyCode == Keys.Z)
             {
-                if(processList.Count > 0)
+                if(processList.Count > 1)
                 {
-                    if (normalBMP.Equals(processList.ElementAt(processList.Count - 1)))
+                    if (normalBMP.Equals(processList.ElementAt(processList.Count-1)))
                         Console.WriteLine("TEEST");
-                    normalBMP = processList.ElementAt(processList.Count-1);
-                    processList.RemoveAt(processList.Count-1);
+                    Bitmap previousImage = processList.ElementAt(processList.Count -1);
+
+                    normalBMP = previousImage;
+                    processList.Remove(normalBMP);
                     pictureBox1.Image = null;
                     pictureBox1.Size = new Size(normalBMP.Width, normalBMP.Height);
                     pictureBox1.Location = new Point((pictureBox1.Parent.ClientSize.Width / 2) - (normalBMP.Width / 2),
                                      (pictureBox1.Parent.ClientSize.Height / 2) - (normalBMP.Height / 2));
-                    pictureBox1.Image = normalBMP;
+                    pictureBox1.Image = processList.ElementAt(processList.Count - 1); ;
                     pictureBox1.Refresh();
                     Console.WriteLine(processList.Count);
                 }
@@ -461,6 +480,8 @@ namespace Test
 
             }
         }
+
+        public Bitmap NormalBMP { get { return normalBMP; } }
 
         private void histogram_Click(object sender, EventArgs e)
         {
@@ -491,7 +512,7 @@ namespace Test
         {
 
         }
-        List<Bitmap> processList = new List<Bitmap>();
+        public static List<Bitmap> processList = new List<Bitmap>();
         private void rotateLeftButton_Click(object sender, EventArgs e)
         {
             if(normalBMP == null)
@@ -510,6 +531,7 @@ namespace Test
 
         private void resize_Click(object sender, EventArgs e)
         {
+            
             if(normalBMP == null)
             {
                 MessageBox.Show("Error");
@@ -518,11 +540,24 @@ namespace Test
             Bitmap image = normalBMP;
             String whS = "" + image.Width;
             String heiS = "" + image.Height;
-                     
-            whS = Interaction.InputBox("Width", "Yeniden Boyutlandır", "", 0, 0);
+            int wh = image.Width;
+            try
+            {
+                whS = Interaction.InputBox("Width", "Yeniden Boyutlandır", "", 0, 0);
+            }catch (Exception ex)
+            {
+            }
             //MessageBox.Show("Girilen isim: " + wh);
             heiS = Interaction.InputBox("Height", "Yeniden Boyutlandır", "", 0, 0);
-            int wh = Int32.Parse(whS);
+            try
+            {
+                wh = Int32.Parse(whS);
+
+            }catch(Exception ex)
+            {
+                whS = "" + image.Width;
+
+            }
             int hei = Int32.Parse(heiS);
             Bitmap newPic = new Bitmap(wh, hei);
             using (Graphics gr = Graphics.FromImage(newPic))
