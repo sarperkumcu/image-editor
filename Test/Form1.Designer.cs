@@ -37,7 +37,6 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.resize = new System.Windows.Forms.Button();
@@ -46,6 +45,8 @@
             this.rotateLeftButton = new System.Windows.Forms.Button();
             this.rgbchannel = new System.Windows.Forms.Button();
             this.histogram = new System.Windows.Forms.Button();
+            this.ınvertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -69,6 +70,8 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
+            this.saveToolStripMenuItem,
+            this.ınvertToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
@@ -80,7 +83,7 @@
             this.openFileToolStripMenuItem,
             this.reopenToolStripMenuItem});
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(120, 26);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -101,7 +104,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(120, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -129,24 +132,13 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(3, 5);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 55);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "invert";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.button1);
-            this.panel2.Controls.Add(this.button2);
-            this.panel2.Controls.Add(this.resize);
             this.panel2.Controls.Add(this.rotateRightButton);
-            this.panel2.Controls.Add(this.grayscale);
+            this.panel2.Controls.Add(this.resize);
             this.panel2.Controls.Add(this.rotateLeftButton);
+            this.panel2.Controls.Add(this.grayscale);
             this.panel2.Controls.Add(this.rgbchannel);
             this.panel2.Controls.Add(this.histogram);
             this.panel2.Location = new System.Drawing.Point(-2, 32);
@@ -157,7 +149,7 @@
             // button1
             // 
             this.button1.Image = global::Test.Properties.Resources.if_mirror_298828;
-            this.button1.Location = new System.Drawing.Point(2, 66);
+            this.button1.Location = new System.Drawing.Point(3, 44);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(73, 55);
             this.button1.TabIndex = 2;
@@ -168,7 +160,7 @@
             // 
             this.resize.AutoSize = true;
             this.resize.Image = ((System.Drawing.Image)(resources.GetObject("resize.Image")));
-            this.resize.Location = new System.Drawing.Point(2, 127);
+            this.resize.Location = new System.Drawing.Point(3, 105);
             this.resize.Name = "resize";
             this.resize.Size = new System.Drawing.Size(73, 56);
             this.resize.TabIndex = 4;
@@ -178,7 +170,7 @@
             // rotateRightButton
             // 
             this.rotateRightButton.Image = global::Test.Properties.Resources.rotateR;
-            this.rotateRightButton.Location = new System.Drawing.Point(39, 251);
+            this.rotateRightButton.Location = new System.Drawing.Point(42, 3);
             this.rotateRightButton.Name = "rotateRightButton";
             this.rotateRightButton.Size = new System.Drawing.Size(36, 35);
             this.rotateRightButton.TabIndex = 9;
@@ -188,7 +180,7 @@
             // grayscale
             // 
             this.grayscale.Image = global::Test.Properties.Resources.imageedit_1_8276654038;
-            this.grayscale.Location = new System.Drawing.Point(3, 189);
+            this.grayscale.Location = new System.Drawing.Point(1, 167);
             this.grayscale.Name = "grayscale";
             this.grayscale.Size = new System.Drawing.Size(75, 56);
             this.grayscale.TabIndex = 5;
@@ -198,7 +190,7 @@
             // rotateLeftButton
             // 
             this.rotateLeftButton.Image = global::Test.Properties.Resources.rotateL;
-            this.rotateLeftButton.Location = new System.Drawing.Point(3, 251);
+            this.rotateLeftButton.Location = new System.Drawing.Point(5, 3);
             this.rotateLeftButton.Name = "rotateLeftButton";
             this.rotateLeftButton.Size = new System.Drawing.Size(33, 35);
             this.rotateLeftButton.TabIndex = 8;
@@ -209,7 +201,7 @@
             // 
             this.rgbchannel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, ((byte)(162)));
             this.rgbchannel.Image = global::Test.Properties.Resources.red_green_blue_three_rgb_circles_symbol;
-            this.rgbchannel.Location = new System.Drawing.Point(2, 292);
+            this.rgbchannel.Location = new System.Drawing.Point(5, 229);
             this.rgbchannel.Name = "rgbchannel";
             this.rgbchannel.Size = new System.Drawing.Size(73, 44);
             this.rgbchannel.TabIndex = 7;
@@ -221,13 +213,27 @@
             // 
             this.histogram.Font = new System.Drawing.Font("Microsoft Sans Serif", 4.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.histogram.Image = ((System.Drawing.Image)(resources.GetObject("histogram.Image")));
-            this.histogram.Location = new System.Drawing.Point(2, 342);
+            this.histogram.Location = new System.Drawing.Point(5, 279);
             this.histogram.Name = "histogram";
             this.histogram.Size = new System.Drawing.Size(73, 45);
             this.histogram.TabIndex = 6;
             this.histogram.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.histogram.UseVisualStyleBackColor = true;
             this.histogram.Click += new System.EventHandler(this.histogram_Click);
+            // 
+            // ınvertToolStripMenuItem
+            // 
+            this.ınvertToolStripMenuItem.Name = "ınvertToolStripMenuItem";
+            this.ınvertToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.ınvertToolStripMenuItem.Text = "Invert";
+            this.ınvertToolStripMenuItem.Click += new System.EventHandler(this.ınvertToolStripMenuItem_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.saveToolStripMenuItem.Text = "Save As";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -264,7 +270,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ToolStripMenuItem openFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reopenToolStripMenuItem;
         private System.Windows.Forms.Button resize;
@@ -274,6 +279,8 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button rotateRightButton;
         private System.Windows.Forms.Button rotateLeftButton;
+        private System.Windows.Forms.ToolStripMenuItem ınvertToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
     }
 }
 

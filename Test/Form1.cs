@@ -11,12 +11,14 @@ using System.Threading.Tasks;
 //using Emgu;
 using Microsoft.VisualBasic;
 using System.Windows.Forms;
+using System.IO;
+using System.Drawing.Imaging;
 
 namespace Test
 {
     public partial class Form1 : Form
     {
-        public Bitmap normalBMP;
+        public static Bitmap normalBMP;
         public Boolean didUserClickMirror = false;
         Color[][] colorMatrix;
         public Bitmap rotatedPic;
@@ -78,7 +80,6 @@ namespace Test
             rotatedPic = new Bitmap(normalBMP.Width, normalBMP.Height);
             y = 0;
             x = normalBMP.Width;
-            processList.Add(normalBMP);
             int z = x -1 ;
             for (int i = 0; i < normalBMP.Width; i++)
             {
@@ -116,7 +117,9 @@ namespace Test
              pictureBox1.Size = new Size(rotatedPic.Width, rotatedPic.Height);*/
              normalBMP = rotatedPic;
              pictureBox1.Image = normalBMP;
-           // didUserClickMirror = true;
+            processList.Add(normalBMP);
+
+            // didUserClickMirror = true;
         }
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -169,10 +172,10 @@ namespace Test
                    newPic.SetPixel(i, j, rotatedPicMatrix[i][j]);
                 }
             }*/
-           // normalBMP = invertedPic;
+            normalBMP = new Bitmap(invertedPic);
 
             pictureBox1.Image = normalBMP;
-            processList.Add(normalBMP);
+            processList.Add(invertedPic);
 
             // rotateLeft();
             //if(didUserClickMirror)
@@ -387,6 +390,7 @@ namespace Test
             //pictureBox1.Location = new Point(0, 0);
             pictureBox1.Image = normalBMP;
             pictureBox1.Refresh();
+            processList.Add(normalBMP);
 
         }
 
@@ -419,65 +423,85 @@ namespace Test
             //pictureBox1.Location = new Point(0, 0);
             pictureBox1.Image = normalBMP;
             pictureBox1.Refresh();
-
+            processList.Add(normalBMP);
 
         }
 
         private void keyPress(object sender, KeyEventArgs e)
         {
-            if (e.Control && e.KeyCode == Keys.Add)
-            {
-                Form2 form2 = new Form2();
-                form2.Show();
-            }
+           if(normalBMP != null) { 
             if(e.Control && e.KeyCode == Keys.D)
             {
-                processList.Add(normalBMP);
+               // processList.Add(normalBMP);
 
                 rotateRight();
+                return;
             }
             if (e.Control && e.KeyCode == Keys.A)
             {
-                processList.Add(normalBMP);
+                //processList.Add(normalBMP);
 
                 rotateLeft();
+                return;
             }
 
             int x = pictureBox1.Location.X;
             int y = pictureBox1.Location.Y;
             if (normalBMP.Width > formWh || normalBMP.Height > formHei)
             {
-                if (e.KeyCode == Keys.A)
+                if (e.KeyCode == Keys.A && normalBMP.Width >formWh)
                 {
                     x += 10;
                     pictureBox1.Location = new Point(x, y);
 
                 }
-                else if (e.KeyCode == Keys.D) { x -= 10; pictureBox1.Location = new Point(x, y); }
-                else if (e.KeyCode == Keys.S) { y -= 10; pictureBox1.Location = new Point(x, y); }
-                else if (e.KeyCode == Keys.W) { y += 10; pictureBox1.Location = new Point(x, y); }
+                else if (e.KeyCode == Keys.D && normalBMP.Width > formWh) {
+                    x -= 10; pictureBox1.Location = new Point(x, y);
+                }
+                else if (e.KeyCode == Keys.S && normalBMP.Height > formHei) {
+                   
+                         y -= 10;
+                         pictureBox1.Location = new Point(x, y);
+                    
+                  
+
+                }
+                else if (e.KeyCode == Keys.W && normalBMP.Height > formHei) {
+                    y += 10;
+                    pictureBox1.Location = new Point(x, y);
+                    Console.WriteLine(y + "  " + normalBMP.Height);
+                }
                 }
 
             if(e.Control && e.KeyCode == Keys.Z)
             {
                 if(processList.Count > 1)
                 {
-                    if (normalBMP.Equals(processList.ElementAt(processList.Count-1)))
-                        Console.WriteLine("TEEST");
-                    Bitmap previousImage = processList.ElementAt(processList.Count -1);
+                    //if (normalBMP.Equals(processList.ElementAt(processList.Count-2)))
+                      //  Console.WriteLine("TEEST");
+                    processList.Remove(processList.ElementAt(processList.Count-1));
 
-                    normalBMP = previousImage;
-                    processList.Remove(normalBMP);
-                    pictureBox1.Image = null;
+                    normalBMP =new Bitmap(processList.ElementAt(processList.Count -1),
+                                        processList.ElementAt(processList.Count-1).Width,
+                                        processList.ElementAt(processList.Count-1).Height);
+                    //normalBMP = new Bitmap(previousImage);
+                   
+                   // normalBMP = (Bitmap) previousImage.Clone();
+                  //  pictureBox1.Image = new Bitmap(processList.ElementAt(processList.Count - 2));
                     pictureBox1.Size = new Size(normalBMP.Width, normalBMP.Height);
                     pictureBox1.Location = new Point((pictureBox1.Parent.ClientSize.Width / 2) - (normalBMP.Width / 2),
                                      (pictureBox1.Parent.ClientSize.Height / 2) - (normalBMP.Height / 2));
-                    pictureBox1.Image = processList.ElementAt(processList.Count - 1); ;
+                    pictureBox1.Image = normalBMP;
                     pictureBox1.Refresh();
+                   // processList.Remove(processList.ElementAt(processList.Count - 1));
                     Console.WriteLine(processList.Count);
                 }
-
-
+            }
+        
+            if(e.Control && e.KeyCode == Keys.S)
+            {
+                saveAs();
+            }
             }
         }
 
@@ -517,7 +541,7 @@ namespace Test
         {
             if(normalBMP == null)
                 MessageBox.Show("Error");
-            processList.Add(normalBMP);
+            //processList.Add(normalBMP);
             rotateLeft();
         }
 
@@ -525,7 +549,7 @@ namespace Test
         {
             if (normalBMP == null)
                 MessageBox.Show("Error");
-            processList.Add(normalBMP);
+            //processList.Add(normalBMP);
             rotateRight();
         }
 
@@ -541,14 +565,16 @@ namespace Test
             String whS = "" + image.Width;
             String heiS = "" + image.Height;
             int wh = image.Width;
+            int hei = image.Height;
+
             try
             {
-                whS = Interaction.InputBox("Width", "Yeniden Boyutlandır", "", 0, 0);
+                whS = Interaction.InputBox("Width", "Yeniden Boyutlandır", whS, 0, 0);
             }catch (Exception ex)
             {
             }
             //MessageBox.Show("Girilen isim: " + wh);
-            heiS = Interaction.InputBox("Height", "Yeniden Boyutlandır", "", 0, 0);
+            heiS = Interaction.InputBox("Height", "Yeniden Boyutlandır", heiS, 0, 0);
             try
             {
                 wh = Int32.Parse(whS);
@@ -558,7 +584,13 @@ namespace Test
                 whS = "" + image.Width;
 
             }
-            int hei = Int32.Parse(heiS);
+            try
+            {
+                hei = Int32.Parse(heiS);
+            }catch(Exception ex)
+            {
+                whS = "" + image.Height;
+            }
             Bitmap newPic = new Bitmap(wh, hei);
             using (Graphics gr = Graphics.FromImage(newPic))
             {
@@ -569,10 +601,57 @@ namespace Test
             }
             normalBMP = newPic;
             pictureBox1.Size = new Size(normalBMP.Width, normalBMP.Height);
-            pictureBox1.Location = new Point((pictureBox1.Parent.ClientSize.Width / 2) - (normalBMP.Width / 2),
-                             (pictureBox1.Parent.ClientSize.Height / 2) - (normalBMP.Height / 2));
-            pictureBox1.Refresh();
+            pictureBox1.Location = new Point((panel1.ClientSize.Width / 2) - (normalBMP.Width / 2),
+                             ( (normalBMP.Height / 2) - panel1.ClientSize.Height / 2));
             pictureBox1.Image = normalBMP;
+            pictureBox1.Refresh();
+            processList.Add(normalBMP);
         }
+
+        private void ınvertToolStripMenuItem_Click(object sender, EventArgs e)
+        {  if (normalBMP == null)
+            {
+                MessageBox.Show("Error");
+                return;
+            }
+            invertImage();
+        }
+        public void saveAs()
+        {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp";
+            saveFileDialog1.Title = "Save an Image File";
+            saveFileDialog1.ShowDialog();
+
+            if (saveFileDialog1.FileName != "")
+            {
+                System.IO.FileStream fs =
+                   (System.IO.FileStream)saveFileDialog1.OpenFile();
+
+                switch (saveFileDialog1.FilterIndex)
+                {
+                    case 1:
+                        this.pictureBox1.Image.Save(fs,
+                           System.Drawing.Imaging.ImageFormat.Jpeg);
+                        break;
+
+                    case 2:
+                        this.pictureBox1.Image.Save(fs,
+                           System.Drawing.Imaging.ImageFormat.Bmp);
+                        break;
+
+                }
+
+                fs.Close();
+            }
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveAs();
+           
+        }
+
+       
     }
 }

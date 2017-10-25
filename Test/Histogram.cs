@@ -23,8 +23,8 @@ namespace Test
             int[] histogram_G = new int[256];
             int[] histogram_B = new int[256];
             int[] histogram_GREY = new int[256];
-            Form1 form1 = new Form1();
-            Bitmap normalBMP = form1.NormalBMP;
+           // Form1 form1 = new Form1();
+            Bitmap normalBMP = Form1.normalBMP;
             float maxR = 0,maxG=0,maxB=0,maxGREY=0;
             for (int i = 0; i < normalBMP.Width; i++)
             {

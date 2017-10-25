@@ -85,8 +85,8 @@ namespace Test
             label4.Location = new Point(250, 250);
             pictureBox4.Location = new Point(250, 250);
             pictureBox4.Size = new Size(250, 250);
-            Form1 form1 = new Form1();
-            Bitmap bmp = form1.NormalBMP;
+           //Form1 form1 = new Form1();
+            Bitmap bmp = Form1.normalBMP;
             pictureBox1.Image = new Bitmap(bmp);
           //new Bitmap(bmp);
            // bmp = Form1.normalBMP;

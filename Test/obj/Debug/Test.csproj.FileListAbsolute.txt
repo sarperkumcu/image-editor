@@ -96,3 +96,8 @@ C:\Users\Sapo\Desktop\bedonepls\image-editor\Test\obj\Debug\Test.csproj.CoreComp
 C:\Users\Sapo\Desktop\bedonepls\image-editor\Test\obj\Debug\Test.exe
 C:\Users\Sapo\Desktop\bedonepls\image-editor\Test\obj\Debug\Test.pdb
 C:\Users\Sapo\Desktop\bedonepls\image-editor\Test\obj\Debug\Test.resize.resources
+C:\Users\Sapo\Desktop\bedonepls\image-editor\Test\bin\Debug\Emgu.CV.DebuggerVisualizers.VS2017.dll
+C:\Users\Sapo\Desktop\bedonepls\image-editor\Test\bin\Debug\Emgu.CV.UI.dll
+C:\Users\Sapo\Desktop\bedonepls\image-editor\Test\bin\Debug\Emgu.CV.UI.GL.dll
+C:\Users\Sapo\Desktop\bedonepls\image-editor\Test\bin\Debug\Emgu.CV.World.dll
+C:\Users\Sapo\Desktop\bedonepls\image-editor\Test\bin\Debug\ZedGraph.dll
